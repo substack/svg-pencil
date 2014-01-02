@@ -1,6 +1,6 @@
 {
   "name": "svg-pencil",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "pencil tool for drawing on scalable vector graphics",
   "main": "index.js",
   "dependencies": {
