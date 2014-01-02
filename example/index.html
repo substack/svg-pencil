@@ -1,10 +1,19 @@
 <html>
   <head>
     <style>
+      body {
+        width: 700px;
+        margin: 50px auto;
+        font-family: sans-serif;
+        box-shadow: 0 0 15px #777;
+        padding: 30px;
+        border-radius: 20px;
+      }
       #viewport {
         border: 2px solid purple;
         width: 700px;
         height: 600px;
+        cursor: pointer;
         /* disable text selection: */
         -webkit-touch-callout: none;
         -webkit-user-select: none;
@@ -16,7 +25,8 @@
     </style>
   </head>
   <body>
-    <div>draw pretty pix</div>
+    <a href="https://github.com/substack/svg-pencil"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+    <h1>draw pretty pix</h1>
     <div id="viewport"></div>
     <script src="bundle.js"></script>
   </body>
