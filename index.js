@@ -15,7 +15,7 @@ function Pencil (opts) {
         svg = document.querySelector(opts.svg);
     }
     this.element = svg;
-    this.polyline = null;
+    this.path = null;
     this.points = [];
     
     this.fill = opts.fill || 'none';
@@ -53,35 +53,41 @@ Pencil.prototype._onmousedown = function (ev) {
     var x = ev.offsetX, y = ev.offsetY;
     
     this.points = [ [ x, y ] ];
-    this.polyline = createElement('polyline');
-    this.polyline.setAttribute('fill', this.fill);
-    this.polyline.setAttribute('stroke', this.stroke);
-    this.polyline.setAttribute('stroke-width', this.strokeWidth);
+    this.path = createElement('path');
+    this.path.setAttribute('style', [
+        'fill:' + this.fill,
+        'stroke:' + this.stroke,
+        'stroke-width:' + this.strokeWidth
+    ].join(';'));
     
     this.emit('point', this.points[0]);
     
-    this.polyline.setAttribute('points', this.points.join(' '));
-    this.emit('polyline', this.polyline);
+    this._setPoints();
+    this.emit('path', this.path);
     
-    this.element.appendChild(this.polyline);
+    this.element.appendChild(this.path);
 };
 
 Pencil.prototype._onmouseup = function (ev) {
     if (!this.enabled) return;
-    if (!this.polyline) return;
+    if (!this.path) return;
     this.emit('points', this.points);
     this.points = [];
-    this.polyline = null;
+    this.path = null;
 };
 
 Pencil.prototype._onmousemove = function (ev) {
     if (!this.enabled) return;
-    if (!this.polyline) return;
+    if (!this.path) return;
     
     var pt = [ ev.offsetX, ev.offsetY ];
     this.emit('point', pt);
     this.points.push(pt);
-    this.polyline.setAttribute('points', this.points.join(' '));
+    this._setPoints();
+};
+
+Pencil.prototype._setPoints = function () {
+    this.path.setAttribute('d', 'M ' + this.points.join(' L '));
 };
 
 Pencil.prototype.appendTo = function (target) {
