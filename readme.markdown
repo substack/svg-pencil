@@ -62,7 +62,7 @@ Create a new pencil instance `p` from `opts`:
 If `opts` is a string, treat it as the `opts.svg` value.
 
 At any time you can modify the `p.stroke`, `p.fill`, and `p.strokeWidth`
-properties, which will affect all new polyline elements.
+properties, which will affect all new `<path>` elements.
 
 ## p.appendTo(target)
 
@@ -72,17 +72,17 @@ Append the svg element root to `target`, a dom element or query selector string.
 
 ## p.on('point', function (pt) {})
 
-Every time a new point is added to the polyline, this event fires with the
+Every time a new point is added to the `<path>`, this event fires with the
 `[x,y]` array `pt`.
 
-## p.on('polyline', function (elem) {})
+## p.on('path', function (elem) {})
 
-When a new polyline is created, this event fires with the element reference
+When a new `<path>` is created, this event fires with the element reference
 `elem`.
 
 ## p.on('points', function (points) {})
 
-When the mouseup event happens and a polyline is no longer being created, this
+When the mouseup event happens and a `<path>` is no longer being created, this
 event fires with the array of `points`.
 
 # install
