@@ -1,0 +1,27 @@
+{
+  "name": "svg-pencil",
+  "version": "0.0.0",
+  "description": "pencil tool for drawing on scalable vector graphics",
+  "main": "index.js",
+  "dependencies": {
+    "inherits": "~2.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/substack/svg-pencil.git"
+  },
+  "homepage": "https://github.com/substack/svg-pencil",
+  "keywords": [
+    "svg",
+    "pencil",
+    "vector",
+    "drawing",
+    "browser"
+  ],
+  "author": {
+    "name": "James Halliday",
+    "email": "mail@substack.net",
+    "url": "http://substack.net"
+  },
+  "license": "MIT"
+}
