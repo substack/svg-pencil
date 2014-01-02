@@ -18,6 +18,10 @@ function Pencil (opts) {
     this.polyline = null;
     this.points = [];
     
+    this.fill = opts.fill || 'transparent';
+    this.stroke = opts.stroke || 'black';
+    this.strokeWidth = opts.strokeWidth || '1px';
+    
     var self = this;
     svg.addEventListener('mousedown', function (ev) { self._onmousedown(ev) });
     svg.addEventListener('mouseup', function (ev) { self._onmouseup(ev) });
@@ -39,9 +43,16 @@ Pencil.prototype._onmousedown = function (ev) {
     
     this.points = [ [ x, y ] ];
     this.polyline = createElement('polyline');
-    this.polyline.setAttribute('points', this.points.join(' '));
-    this.element.appendChild(this.polyline);
+    this.polyline.setAttribute('fill', this.fill);
+    this.polyline.setAttribute('stroke', this.stroke);
+    this.polyline.setAttribute('stroke-width', this.strokeWidth);
+    
     this.emit('point', this.points[0]);
+    
+    this.polyline.setAttribute('points', this.points.join(' '));
+    this.emit('polyline', this.polyline);
+    
+    this.element.appendChild(this.polyline);
 };
 
 Pencil.prototype._onmouseup = function (ev) {
@@ -56,9 +67,9 @@ Pencil.prototype._onmousemove = function (ev) {
     if (!this.polyline) return;
     
     var pt = [ ev.offsetX, ev.offsetY ];
+    this.emit('point', pt);
     this.points.push(pt);
     this.polyline.setAttribute('points', this.points.join(' '));
-    this.emit('point', pt);
 };
 
 Pencil.prototype._onmouseout = function (ev) {
