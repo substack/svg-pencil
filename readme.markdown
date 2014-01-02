@@ -55,7 +55,7 @@ var pencil = require('svg-pencil')
 Create a new pencil instance `p` from `opts`:
 
 * `opts.svg` - use an existing svg element instead of creating one
-* `opts.fill` - the fill color to use, default: `'transparent'`
+* `opts.fill` - the fill color to use, default: `'none'`
 * `opts.stroke` - the stroke color to use, default: `'black'`
 * `opts.strokeWidth` - the stroke width, default: `'1px'`
 

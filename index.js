@@ -18,7 +18,7 @@ function Pencil (opts) {
     this.polyline = null;
     this.points = [];
     
-    this.fill = opts.fill || 'transparent';
+    this.fill = opts.fill || 'none';
     this.stroke = opts.stroke || 'black';
     this.strokeWidth = opts.strokeWidth || '1px';
     
