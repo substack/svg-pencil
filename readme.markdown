@@ -4,6 +4,8 @@ pencil tool for drawing on scalable vector graphics
 
 # example
 
+[run this demo](http://scratch.substack.net/svg-pencil/)
+
 main.js:
 
 ``` js
