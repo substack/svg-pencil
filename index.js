@@ -23,11 +23,22 @@ function Pencil (opts) {
     this.strokeWidth = opts.strokeWidth || '1px';
     
     var self = this;
-    svg.addEventListener('mousedown', function (ev) { self._onmousedown(ev) });
-    svg.addEventListener('mouseup', function (ev) { self._onmouseup(ev) });
-    svg.addEventListener('mousemove', function (ev) { self._onmousemove(ev) });
-    svg.addEventListener('mouseout', function (ev) { self._onmouseout(ev) });
+    this.root = opts.root || window;
+    this.listeners = {
+        mousedown: function (ev) { self._onmousedown(ev) },
+        mouseup: function (ev) { self._onmouseup(ev) },
+        mousemove: function (ev) { self._onmousemove(ev) }
+    };
+    svg.addEventListener('mousedown', this.listeners.mousedown);
+    this.root.addEventListener('mouseup', this.listeners.mouseup);
+    this.root.addEventListener('mousemove', this.listeners.mousemove);
 }
+
+Pencil.prototype.unregister = function () {
+    this.element.removeEventListener('mousedown', this.listeners.mousedown);
+    this.root.removeEventListener('mouseup', this.listeners.mouseup);
+    this.root.removeEventListener('mousemove', this.listeners.mousemove);
+};
 
 Pencil.prototype.enable = function () {
     this.enabled = true;
@@ -57,6 +68,7 @@ Pencil.prototype._onmousedown = function (ev) {
 
 Pencil.prototype._onmouseup = function (ev) {
     if (!this.enabled) return;
+    if (!this.polyline) return;
     this.emit('points', this.points);
     this.points = [];
     this.polyline = null;
@@ -70,11 +82,6 @@ Pencil.prototype._onmousemove = function (ev) {
     this.emit('point', pt);
     this.points.push(pt);
     this.polyline.setAttribute('points', this.points.join(' '));
-};
-
-Pencil.prototype._onmouseout = function (ev) {
-    if (!this.enabled) return;
-    if (!this.polyline) return;
 };
 
 Pencil.prototype.appendTo = function (target) {
