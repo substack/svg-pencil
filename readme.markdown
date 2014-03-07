@@ -87,6 +87,14 @@ When a new `<path>` is created, this event fires with the element reference
 When the mouseup event happens and a `<path>` is no longer being created, this
 event fires with the array of `points`.
 
+## p.hide()
+
+Hide the svg.
+
+## p.show()
+
+Show the svg.
+
 ## var svgSource = p.toSource()
 
 Return an `svgSource` string with the file contents.
