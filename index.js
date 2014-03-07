@@ -29,7 +29,7 @@ function Pencil (opts) {
         mouseup: function (ev) { self._onmouseup(ev) },
         mousemove: function (ev) { self._onmousemove(ev) }
     };
-    svg.addEventListener('mousedown', this.listeners.mousedown);
+    this.element.addEventListener('mousedown', this.listeners.mousedown);
     this.root.addEventListener('mouseup', this.listeners.mouseup);
     this.root.addEventListener('mousemove', this.listeners.mousemove);
 }
@@ -90,6 +90,12 @@ Pencil.prototype._setPoints = function () {
     this.path.setAttribute('d', 'M ' + this.points.join(' L '));
 };
 
+Pencil.prototype.toSource = function () {
+    var div = document.createElement('div');
+    div.appendChild(this.element.cloneNode(true));
+    return div.innerHTML;
+};
+
 Pencil.prototype.appendTo = function (target) {
     if (typeof target === 'string') {
         target = document.querySelector(target);
@@ -100,3 +106,9 @@ Pencil.prototype.appendTo = function (target) {
 function createElement (name) {
     return document.createElementNS('http://www.w3.org/2000/svg', name);
 }
+
+Pencil.parse = function (src) {
+    var div = document.createElement('div');
+    div.innerHTML = src;
+    return new Pencil({ svg: div.querySelector('svg') });
+};
