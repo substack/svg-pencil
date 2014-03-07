@@ -41,11 +41,15 @@ Pencil.prototype.unregister = function () {
 };
 
 Pencil.prototype.enable = function () {
+    if (this.enabled) return;
     this.enabled = true;
+    this.emit('enable');
 };
 
 Pencil.prototype.disable = function () {
+    if (!this.enable) return;
     this.enabled = false;
+    this.emit('disable');
 };
 
 Pencil.prototype._onmousedown = function (ev) {
