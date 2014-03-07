@@ -87,6 +87,14 @@ When a new `<path>` is created, this event fires with the element reference
 When the mouseup event happens and a `<path>` is no longer being created, this
 event fires with the array of `points`.
 
+## var svgSource = p.toSource()
+
+Return an `svgSource` string with the file contents.
+
+## var p = pencil.parse(svgSource)
+
+Return a new pencil instance `p` from some existing svg source `svgSource`.
+
 # install
 
 With [npm](https://npmjs.org) do:
