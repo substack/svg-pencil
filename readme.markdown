@@ -70,6 +70,30 @@ properties, which will affect all new `<path>` elements.
 
 Append the svg element root to `target`, a dom element or query selector string.
 
+## p.hide()
+
+Hide the svg.
+
+## p.show()
+
+Show the svg.
+
+## p.enable()
+
+Enable event handling.
+
+## p.disable()
+
+Disable event handling.
+
+## var svgSource = p.toSource()
+
+Return an `svgSource` string with the file contents.
+
+## var p = pencil.parse(svgSource)
+
+Return a new pencil instance `p` from some existing svg source `svgSource`.
+
 # events
 
 ## p.on('point', function (pt) {})
@@ -87,21 +111,13 @@ When a new `<path>` is created, this event fires with the element reference
 When the mouseup event happens and a `<path>` is no longer being created, this
 event fires with the array of `points`.
 
-## p.hide()
+## p.on('enable', function () {})
 
-Hide the svg.
+Emitted when the pencil is enabled.
 
-## p.show()
+## p.on('disable', function () {})
 
-Show the svg.
-
-## var svgSource = p.toSource()
-
-Return an `svgSource` string with the file contents.
-
-## var p = pencil.parse(svgSource)
-
-Return a new pencil instance `p` from some existing svg source `svgSource`.
+Emitted when the pencil is disabled.
 
 # install
 
