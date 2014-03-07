@@ -103,6 +103,22 @@ Pencil.prototype.appendTo = function (target) {
     target.appendChild(this.element);
 };
 
+Pencil.prototype.hide = function () {
+    if (this._hidden) return;
+    this._hidden = true;
+    var style = window.getComputedStyle(this.element);
+    this._size = { width: style.width, height: style.height };
+    this.element.style.width = 0;
+    this.element.style.height = 0;
+};
+
+Pencil.prototype.show = function () {
+    if (!this._hidden) return;
+    this._hidden = false;
+    this.element.style.width = this._size.width;
+    this.element.style.height = this._size.height;
+};
+
 function createElement (name) {
     return document.createElementNS('http://www.w3.org/2000/svg', name);
 }
